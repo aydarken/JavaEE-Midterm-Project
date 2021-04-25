@@ -1,6 +1,5 @@
 <%@ page import="com.example.JavaEEmidtermProject.models.Book" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.JavaEEmidtermProject.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -8,6 +7,8 @@
     <title>List of books</title>
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
+
 <h3>Book List</h3>
 <table border="1" cellpadding="2" cellspacing="2">
     <tr>
@@ -28,6 +29,7 @@
         <td><%=book.getAuthor() %></td>
         <td><%=book.getGenre() %></td>
         <td><%=book.getPublished() %></td>
+        <td><input type="button" name="borrow" value="borrow"></td>
 
     </tr>
     <%}%>

@@ -6,6 +6,15 @@ public class Book {
     private String author;
     private String genre;
     private int published;
+    private long userId = 0;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public Book(long id, String title, String author, String genre, int published) {
         this.id = id;

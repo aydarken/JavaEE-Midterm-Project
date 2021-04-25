@@ -9,6 +9,8 @@
     </style>
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
+
 <h1>Add book</h1>
 <form action="add_book" method="post">
     <div>

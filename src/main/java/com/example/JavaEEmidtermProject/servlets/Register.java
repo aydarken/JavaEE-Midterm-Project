@@ -33,6 +33,7 @@ public class Register extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+        session.setAttribute("email", email);
 
         try {
             Connection connection = ConnectionToDB.getNewConnection();

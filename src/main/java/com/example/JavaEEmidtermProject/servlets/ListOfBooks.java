@@ -2,6 +2,7 @@ package com.example.JavaEEmidtermProject.servlets;
 
 import com.example.JavaEEmidtermProject.db_connection.ConnectionToDB;
 import com.example.JavaEEmidtermProject.models.Book;
+import com.example.JavaEEmidtermProject.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,5 +49,13 @@ public class ListOfBooks extends HttpServlet {
         req.setAttribute("books", books);
         req.getRequestDispatcher("/listOfBooks.jsp").forward(req, resp);
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        User user = (User) req.getAttribute("user");
+
+//        if (req.getParameter("borrow" )!= null)
+//        user.borrowBook();
     }
 }

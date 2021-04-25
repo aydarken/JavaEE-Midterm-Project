@@ -7,6 +7,8 @@
     <title>Profile</title>
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
+
 <h1>Profile page</h1>
 <%
     User user = (User) request.getAttribute("user");
