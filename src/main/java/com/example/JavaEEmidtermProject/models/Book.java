@@ -1,6 +1,6 @@
 package com.example.JavaEEmidtermProject.models;
 
-public class Book {
+public class Book implements java.io.Serializable {
     private long id;
     private String title;
     private String author;
@@ -15,7 +15,9 @@ public class Book {
     public void setUserId(long userId) {
         this.userId = userId;
     }
+    public Book(){
 
+    }
     public Book(long id, String title, String author, String genre, int published) {
         this.id = id;
         this.title = title;

@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String surname;
     private String email;
     private String password;
-    @OneToMany private List<Book> books;
+    @OneToMany
+    private List<Book> books;
 
     public User(long id, String name, String surname, String email, String password) {
         this.id = id;
@@ -22,8 +23,9 @@ public class User {
         this.books = new ArrayList<>();
     }
 
-    public void borrowBook(Book book){
+    public void borrowBook(Book book) {
         books.add(book);
+        book.setUserId(this.getId());
         System.out.println("New book added" + book.getTitle());
     }
 

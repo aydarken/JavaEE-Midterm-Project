@@ -6,3 +6,4 @@
 <a href="books">Books  </a>
 <a href="profile">Profile  </a>
 <a href="add_book">Add book</a>
+<a href="migrate">Migrate DB</a>
