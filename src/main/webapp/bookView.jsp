@@ -1,16 +1,14 @@
-<%@ page import="com.example.JavaEEmidtermProject.models.Book" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.JavaEEmidtermProject.models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.JavaEEmidtermProject.models.Book" %>
 <html>
 <head>
-    <title>List of books</title>
+    <title>View book</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 
 <h3>Book List</h3>
-<form action="borrowBook" method="get">
+<form action="books" method="post">
     <table border="1" cellpadding="2" cellspacing="2">
         <tr>
             <th>Id</th>
@@ -20,10 +18,9 @@
             <th>Published</th>
         </tr>
         <%
-            List<?> books =
-                    (List<?>) request.getAttribute("books");
-            for (Object element : books) {
-                final Book book = (Book) element;
+           Book book =
+                   (Book) request.getAttribute("books");
+
         %>
         <tr>
             <td><%=book.getId() %>
@@ -36,11 +33,10 @@
             </td>
             <td><%=book.getPublished() %>
             </td>
-            <td><input type="submit" name="view" value="view more"></td>
+            <td><input type="submit" name="borrow" value="borrow"></td>
 
         </tr>
         <%}%>
     </table>
-</form>
 </body>
 </html>

@@ -25,6 +25,7 @@ public class User implements java.io.Serializable {
 
     public void borrowBook(Book book) {
         books.add(book);
+
         book.setUserId(this.getId());
         System.out.println("New book added" + book.getTitle());
     }

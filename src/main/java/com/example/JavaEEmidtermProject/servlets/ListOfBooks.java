@@ -53,9 +53,10 @@ public class ListOfBooks extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        User user = (User) req.getAttribute("user");
+        User user = (User) req.getAttribute("user");
 
-//        if (req.getParameter("borrow" )!= null)
-//        user.borrowBook();
+        if (req.getParameter("borrow" )!= null)
+            user.borrowBook((Book) req.getAttribute("book"));
+        resp.sendRedirect("/borrowBook");
     }
 }

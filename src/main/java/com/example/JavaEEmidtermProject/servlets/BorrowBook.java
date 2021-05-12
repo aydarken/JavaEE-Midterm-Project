@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,17 @@ public class BorrowBook extends HttpServlet {
     Statement statement;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ConnectionToDB connection = new ConnectionToDB();
+        request.getRequestDispatcher("/bookView.jsp").forward(request, response);
+
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            Connection connection = ConnectionToDB.getNewConnection();
+            statement = connection.createStatement();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
 
         int bookId = Integer.parseInt(request.getParameter("id"));
 
@@ -32,10 +43,6 @@ public class BorrowBook extends HttpServlet {
                 request.getRequestDispatcher("allBooks.jsp").forward(request, response);
             }
         }
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     public Book getBookById(int id) {
@@ -63,7 +70,7 @@ public class BorrowBook extends HttpServlet {
 
     public int borrowBook(int userId, Book book) {
         String sqlString;
-        sqlString = "insert into book(user_id, book_id) values("
+        sqlString = "insert into user_books(user_id, book_id) values("
                 + userId + ", "
                 + book.getId() + ")";
 
