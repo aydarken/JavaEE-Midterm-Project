@@ -14,6 +14,8 @@ public class User implements java.io.Serializable {
     @OneToMany
     private List<Book> books;
 
+    public User(){
+    }
     public User(long id, String name, String surname, String email, String password) {
         this.id = id;
         this.name = name;
@@ -35,7 +37,7 @@ public class User implements java.io.Serializable {
     }
 
     public void setId(long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getName() {

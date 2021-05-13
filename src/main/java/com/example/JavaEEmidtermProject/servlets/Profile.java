@@ -1,6 +1,7 @@
 package com.example.JavaEEmidtermProject.servlets;
 
 import com.example.JavaEEmidtermProject.db_connection.ConnectionToDB;
+import com.example.JavaEEmidtermProject.models.Book;
 import com.example.JavaEEmidtermProject.models.User;
 
 import javax.servlet.ServletException;
@@ -14,31 +15,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "profileServlet", value = "/profile")
 public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        List<Book> books = new ArrayList<>();
 
+        User user = (User) session.getAttribute("user");
         try {
             Connection connection = ConnectionToDB.getNewConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from user where email=?");
-            ps.setString(1, session.getAttribute("email").toString());
-
+            PreparedStatement ps = connection.prepareStatement("select * from book");
             ResultSet rs = ps.executeQuery();
-            User user = null;
-            while (rs.next()){
-                user  = new User(
-                        rs.getLong(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5)
+            while (rs.next()) {
+                books.add(new Book(
+                                rs.getInt(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getString(4),
+                                rs.getInt(5)
+                        )
                 );
             }
 
-            System.out.println("user.getEmail() = " + user.getEmail());
             req.setAttribute("user", user);
 
             rs.close();
@@ -49,13 +51,13 @@ public class Profile extends HttpServlet {
             e.printStackTrace();
         }
 
-
+        req.setAttribute("UserBooks", books);
         req.getRequestDispatcher("/profile.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/profile.jsp").forward(req,resp);
+        req.getRequestDispatcher("/profile.jsp").forward(req, resp);
     }
 }

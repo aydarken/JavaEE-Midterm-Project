@@ -10,8 +10,8 @@
 <jsp:include page="navbar.jsp"/>
 
 <h3>Book List</h3>
-<form action="borrowBook" method="get">
-    <table border="1" cellpadding="2" cellspacing="2">
+<form action="books" method="post">
+    <table border="1" cellpadding="2" cellspacing="2" class="table table-hover">
         <tr>
             <th>Id</th>
             <th>Title</th>
@@ -24,6 +24,9 @@
                     (List<?>) request.getAttribute("books");
             for (Object element : books) {
                 final Book book = (Book) element;
+            session.setAttribute("book", book);
+
+
         %>
         <tr>
             <td><%=book.getId() %>
@@ -36,7 +39,7 @@
             </td>
             <td><%=book.getPublished() %>
             </td>
-            <td><input type="submit" name="view" value="view more"></td>
+            <td><input type="submit" name="view-more" value="view more"></td>
 
         </tr>
         <%}%>

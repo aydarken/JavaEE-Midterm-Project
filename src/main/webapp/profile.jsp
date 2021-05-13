@@ -27,7 +27,7 @@
     </tr>
     <%
         List<Book> books =
-            ((User)request.getAttribute("user")).getBooks();
+                (List<Book>) request.getAttribute("UserBooks");
         for(Book book: books){
     %>
     <tr>

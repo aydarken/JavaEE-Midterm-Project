@@ -8,35 +8,25 @@
 <jsp:include page="navbar.jsp"/>
 
 <h3>Book List</h3>
-<form action="books" method="post">
-    <table border="1" cellpadding="2" cellspacing="2">
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Genre</th>
-            <th>Published</th>
-        </tr>
-        <%
-           Book book =
-                   (Book) request.getAttribute("books");
+<form action="book_view" method="post">
+    <%
+        Book book = (Book) session.getAttribute("book");
+        System.out.println("book view " + book.getPublished());
+    %>
+    <h1>
+        <%= book.getTitle() %>
+    </h1>
+    <h3>
+        <%=book.getAuthor() %>
+    </h3>
+    <h3>
+        <%=book.getGenre() %>
+    </h3>
+    <h3>
+        <%=book.getPublished() %>
+    </h3>
+    <input type="submit" name="borrow" value="borrow">
 
-        %>
-        <tr>
-            <td><%=book.getId() %>
-            </td>
-            <td><%=book.getTitle() %>
-            </td>
-            <td><%=book.getAuthor() %>
-            </td>
-            <td><%=book.getGenre() %>
-            </td>
-            <td><%=book.getPublished() %>
-            </td>
-            <td><input type="submit" name="borrow" value="borrow"></td>
-
-        </tr>
-        <%}%>
-    </table>
+</form>
 </body>
 </html>

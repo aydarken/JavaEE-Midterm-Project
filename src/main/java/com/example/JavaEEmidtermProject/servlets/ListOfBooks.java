@@ -20,7 +20,8 @@ import java.util.List;
 @WebServlet(name = "listOfBooksServlet", value = "/books")
 public class ListOfBooks extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         List<Book> books = new ArrayList<>();
         books.add(new Book(0, "test", "test", "test", 2344));
 
@@ -30,17 +31,20 @@ public class ListOfBooks extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                books.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getInt(5)));
+                books.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5)
+                        )
+                );
 
                 System.out.println(books.get(1).getPublished());
             }
 
             rs.close();
             connection.close();
-
-
-
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -52,11 +56,12 @@ public class ListOfBooks extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getAttribute("user");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-        if (req.getParameter("borrow" )!= null)
-            user.borrowBook((Book) req.getAttribute("book"));
-        resp.sendRedirect("/borrowBook");
+        if (req.getParameter("view-more") != null) {
+            resp.sendRedirect("book_view");
+        }
+
     }
 }

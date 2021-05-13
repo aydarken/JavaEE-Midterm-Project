@@ -1,6 +1,8 @@
 package com.example.JavaEEmidtermProject.servlets;
 
 import com.example.JavaEEmidtermProject.db_connection.ConnectionToDB;
+import com.example.JavaEEmidtermProject.models.Book;
+import com.example.JavaEEmidtermProject.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +27,8 @@ public class Login extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         boolean status = false;
+        User user = new User();
+
         try {
 
             Connection connection = ConnectionToDB.getNewConnection();
@@ -36,6 +40,11 @@ public class Login extends HttpServlet {
 
             ResultSet resultSet = ps.executeQuery();
             status = resultSet.next();
+                        user.setId( resultSet.getInt(1));
+                        user.setName(resultSet.getString(2));
+                        user.setSurname(resultSet.getString(3));
+                        user.setEmail(email);
+                        user.setPassword(password);
 
             resultSet.close();
             ps.close();
@@ -47,8 +56,8 @@ public class Login extends HttpServlet {
         }
 
         if (status) {
-
             session.setAttribute("email", email);
+            session.setAttribute("user", user);
             resp.sendRedirect("profile");
 //            req.getRequestDispatcher("/profile").forward(req, resp);
         } else {

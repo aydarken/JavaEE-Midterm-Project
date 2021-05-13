@@ -5,10 +5,10 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1>
-    Online Library
-</h1>
 <jsp:include page="navbar.jsp"/>
-
+<h1 class="mx-auto" style="width: 200px;">
+    The Home page of Online Library System
+</h1>
+<p></p>
 </body>
 </html>
